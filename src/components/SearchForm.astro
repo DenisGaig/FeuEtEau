@@ -1,0 +1,20 @@
+---
+import './../styles/index.css'
+---
+
+<form class="form-container" id="search-form" action="/blog/search">
+    <label for="search">Tu cherches un mot dans un de mes poème ?
+      <svg xmlns="http://www.w3.org/2000/svg" x-bind:width="size" x-bind:height="size" viewBox="0 0 24 24" fill="none" stroke="currentColor" x-bind:stroke-width="stroke" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+      
+      <path d="M12 9v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-3v-6h3z"></path>
+      <path d="M3 9v6"></path>
+      <path d="M6 9v6"></path>
+      
+      </svg>
+    </label>
+    <input type="text" id="query" name="query" required placeholder="c'est par ici ..." id="search">
+
+    <button type="submit" >
+      🔥
+  </button>
+</form>

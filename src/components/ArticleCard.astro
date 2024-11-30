@@ -1,0 +1,26 @@
+---
+import './../styles/index.css'
+import {DateFormater} from "./../utils"
+import Tags from './Tags.astro';
+
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+    article: CollectionEntry<'blog'>
+}
+const {article} = Astro.props;
+
+---
+
+<div class="article-card">
+    <a href={'/blog/' + article.slug}>
+        <img src={/images/ + article.data.image} alt="photo1">
+        <h2>{article.data.title}</h2>
+        <p class="date">Date : {DateFormater(article.data.pubDate)}</p>
+    </a>
+        
+        <Tags tags={article.data.tags} />
+        <div class="three-lines-paragraph">
+            <p>{article.body}</p>
+        </div>
+    
+</div>

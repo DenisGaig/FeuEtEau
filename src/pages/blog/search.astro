@@ -1,0 +1,46 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
+
+import ArticleCard from "../../components/ArticleCard.astro";
+import SearchForm from "../../components/SearchForm.astro";
+
+const query: string | null = Astro.url.searchParams.get('query')
+
+const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'))
+
+// Filter articles based on query
+const searchResults = allBlogArticles.filter((article)=> {
+    const titleMatch: boolean = article.data.title
+        .toLowerCase()
+        .includes(query!.toLowerCase())
+    
+    const bodyMatch: boolean = article.body
+        .toLowerCase()
+        .includes(query!.toLowerCase())
+
+    const slugMatch: boolean = article.slug
+        .toLowerCase()
+        .includes(query!.toLowerCase())
+
+    return titleMatch || bodyMatch || slugMatch
+})
+---
+
+<MainLayout title="Search Results">
+    <div class="search-page">
+        
+        <a href="/blog" class="back">Tous les poèmes</a>
+        <div class="search-container">
+			<SearchForm />
+		</div>   
+        <span class="title">Voici tous les poèmes avec -- {query}</span>
+        <div class="search-articles-container">
+            {searchResults.map((article)=> (<ArticleCard article={article}/>))}
+
+        </div>
+        
+    </div>
+
+</MainLayout>

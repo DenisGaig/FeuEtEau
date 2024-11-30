@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import logo from "./../images/avatar.webp"
+
+
+---
+
+<nav id="navbar">
+    <div class="logo-container">
+        
+            <a href="/" class="logo">
+                <Image src={logo} id="avatarId"  alt="logo" width={50}/>
+                <span>
+                    LE FEU ET L'EAU
+                </span>
+            </a>
+        
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a class="route" href="/">Accueil</a></li>
+            <li><a class="route" href="/blog">Blog</a></li>
+            <li><a class="route" href="/about">A propos</a></li>
+
+        </ul>
+    </div>
+</nav>
+
+<script>
+    const navbar = document.querySelector<HTMLElement>("#navbar")
+        const logo = document.querySelector<HTMLElement>("#avatarId")
+    
+if (navbar === null || logo === null) {
+    throw new Error('navbar isrequired')
+}
+
+    window.addEventListener('scroll',()=>{
+        if (window.scrollY > 100) 
+            { 
+                navbar.style.height = "50px";
+                logo.style.width = "40px";
+                logo.style.height = "40px"
+
+            } else {
+                navbar.style.height = "70px";
+                logo.style.width = "50px";
+                logo.style.height = "50px"
+            } 
+        })
+
+</script>

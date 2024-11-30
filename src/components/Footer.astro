@@ -1,0 +1,26 @@
+---
+
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { capitalize } from "../utils";
+
+const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog')
+
+const tags: string[] = allBlogArticles.flatMap((article: any)=> article.data.tags)
+
+const uniqueTags: string[] = [...new Set(tags)]
+
+console.log(uniqueTags);
+---
+
+<footer>
+    <div class="about-footer">
+        <h2>Les désirs de l'âme</h2>
+        <p>Blog d'une poétesse thérapeute sur l'amour et la spiritualité</p>
+    </div>
+    <div class="tags-container">
+        <ul>
+            {uniqueTags.map((tag)=>(<li class="tag-footer"><a href={"/blog/tag/" + tag}># {capitalize(tag)}</a></li>))}
+        </ul>
+    </div>
+</footer>

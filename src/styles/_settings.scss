@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url(../fonts/OpenDyslexic-Regular.otf);
+}
+
+$font1: OpenDyslexic, sans-serif;
+
+$color3: #580a30;
+$color2: #cb163f;
+$color1: #ee8502;
+$color4: #f9cc00;
+$color5: #9db386;
+$gray: #d3d2e0;
+$black: #0e1c13;
+$white: #f5f5f5;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font1;
+  color: $black;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  section {
+    min-height: 70vh;
+  }
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,20 @@
+---
+import './../styles/index.css'
+import MainLayout from '../layouts/MainLayout.astro'
+import { Image } from 'astro:assets'
+import avatar from "./../images/avatar.webp"
+---
+
+<MainLayout>
+	<div class="about-container">
+
+        <div class="avatar-content">
+            <h1>A propos</h1>
+            <Image class="avatar" src={avatar} alt="Mon avatar" width="200"/>
+            <h2> de la poétesse</h2>
+        </div>
+        <div class="qui-suis-je">
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit consequat tincidunt diam, elementum curae mauris at interdum eleifend ullamcorper quisque purus, ultricies cum phasellus ultrices dictum penatibus netus augue libero sodales, lacinia dignissim suspendisse sociosqu justo accumsan viverra sociis.</p>
+        </div>
+    </div>
+</MainLayout>

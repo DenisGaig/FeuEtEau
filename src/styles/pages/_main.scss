@@ -1,0 +1,85 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    min-height: 60vh;
+
+    margin: 70px 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: url("/images/back.jpg") center/cover;
+
+    @media screen and (min-width: 250px) and (max-width: 928px) {
+      & {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .title-container {
+      width: 50%;
+
+      @media screen and (min-width: 250px) and (max-width: 928px) {
+        & {
+          margin-top: 40px;
+          width: 90%;
+          text-align: center;
+        }
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: $color3;
+
+        @media screen and (min-width: 250px) and (max-width: 550px) {
+          & {
+            font-size: 2rem;
+          }
+        }
+      }
+      h2 {
+        color: $color2;
+
+        @media screen and (min-width: 250px) and (max-width: 928px) {
+          & {
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+    .recent-article {
+      width: 50%;
+
+      @media screen and (min-width: 250px) and (max-width: 928px) {
+        & {
+          width: 80%;
+        }
+      }
+      // margin-top: 70px;
+      // margin-bottom: 30px;
+    }
+  }
+
+  .articles-grid {
+    // grid-area: article;
+    margin: 0 30px 30px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+
+    @media screen and (min-width: 250px) and (max-width: 550px) {
+      & {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+    @media screen and (min-width: 551px) and (max-width: 768px) {
+      & {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}

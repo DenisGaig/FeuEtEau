@@ -1,0 +1,13 @@
+---
+const {tags} = Astro.props
+import { capitalize } from '../utils';
+
+interface Props {
+    tags: string[];
+}
+
+---
+<!-- Capitalize the first letter -->
+<div class="tag-container">
+    {tags.map((tag:string, index:number)=>(<span class={index %2 === 0 ? "tag-odd" : "tag-even"}><a href={"/blog/tag/" + tag}>{capitalize(tag)}</a></span>))}
+</div>

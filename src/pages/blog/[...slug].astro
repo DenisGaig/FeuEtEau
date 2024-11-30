@@ -1,0 +1,51 @@
+---
+import "./../../styles/index.css"
+import MainLayout from "../../layouts/MainLayout.astro" 
+import {DateFormater} from "./../../utils"
+import Tags from "../../components/Tags.astro";
+
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const {slug} = Astro.params;
+if (slug === undefined) {
+    throw new Error('Slug is required')
+}
+
+const entry = await getEntry('blog',slug)
+if (entry === undefined) {
+    return Astro.redirect('/404')
+}
+
+// export async function getStaticPaths() {
+//  const blog = await getCollection("blog")   
+//     return blog.map((entry)=> ({
+//         params: {slug: entry.slug},
+//         props: {entry},
+//     }));
+// };
+// type Props = {
+//     entry: CollectionEntry<"blog">
+// }
+// const {entry} = Astro.props
+
+const {Content} = await entry.render()
+
+---
+
+<MainLayout>
+    <div class="article-container">
+        
+            <a href="/blog" class="back-article"> Retour aux poèmes </a>
+            <h1>{entry.data.title}</h1>
+            <h3>Ecrit par: {entry.data.author}</h3>
+            <p class="date">{DateFormater(entry.data.pubDate)}</p>
+            <Tags tags={entry.data.tags} />
+            <img src={'/images/' + entry.data.image} alt="image de l'article">
+            <Content />
+    </div>
+</MainLayout>
+
+<style is:global>
+/*Pour styliser le composant Content mais avec la classe article-content je touche le contenu de content*/
+</style>

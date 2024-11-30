@@ -1,0 +1,32 @@
+.tag-container {
+  margin: 10px auto 20px;
+  display: flex;
+  gap: 10px;
+
+  .tag-odd,
+  .tag-even {
+    max-width: 90px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 10px;
+
+    a:link {
+      color: $white;
+    }
+    a:visited {
+      color: azure;
+    }
+    a:hover {
+      color: rgb(72, 8, 133);
+    }
+  }
+  .tag-odd {
+    background-color: $color1;
+  }
+  .tag-even {
+    background-color: $color2;
+  }
+}

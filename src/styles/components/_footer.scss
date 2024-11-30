@@ -1,0 +1,26 @@
+footer {
+  min-height: 150px;
+  padding: 20px 30px;
+  background-color: $color1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 50px;
+
+  .about-footer {
+    width: 30%;
+    @media screen and (min-width: 250px) and (max-width: 550px) {
+      & {
+        width: 50%;
+      }
+    }
+
+    h2 {
+      color: $color3;
+    }
+    p {
+      margin-top: 20px;
+      width: 80%;
+    }
+  }
+}

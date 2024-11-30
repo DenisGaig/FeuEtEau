@@ -1,0 +1,36 @@
+.form-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  label {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 20px;
+    }
+  }
+
+  input {
+    width: 300px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    padding: 3px 5px;
+    border: 1px solid $gray;
+  }
+
+  button {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.3rem;
+    transition: 50ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}

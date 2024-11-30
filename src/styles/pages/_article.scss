@@ -1,0 +1,47 @@
+.article-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 60%;
+
+  .back-article {
+    margin-top: 100px;
+    width: fit-content;
+    padding: 0 10px;
+    background-color: $color1;
+    border-radius: 10px;
+    border: none;
+
+    &:hover {
+      color: $white;
+      background: $color2;
+    }
+  }
+
+  h1 {
+    margin: 30px auto 15px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .date {
+    color: $black;
+    font-size: 0.8rem;
+  }
+
+  p {
+    margin: 10px 0 20px 0;
+    font-size: 0.9rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+  }
+  h2 {
+    margin: 10px 0 20px;
+    color: $color1;
+  }
+  h3 {
+    font-size: 0.8rem;
+  }
+}
