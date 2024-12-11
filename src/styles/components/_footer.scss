@@ -1,7 +1,7 @@
 footer {
   min-height: 150px;
   padding: 20px 30px;
-  background-color: $color1;
+  background-color: $black;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -16,11 +16,15 @@ footer {
     }
 
     h2 {
-      color: $color3;
+      color: $white;
     }
     p {
       margin-top: 20px;
       width: 80%;
+      color: $white;
     }
+  }
+  .tags-container a {
+    color: $white;
   }
 }

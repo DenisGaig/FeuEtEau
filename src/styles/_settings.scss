@@ -1,24 +1,29 @@
 @font-face {
-  font-family: "OpenDyslexic";
-  src: url(../fonts/OpenDyslexic-Regular.otf);
+  font-family: "Montez";
+  src: url(../fonts/Montez-Regular.ttf);
+}
+@font-face {
+  font-family: "Julius";
+  src: url(../fonts/ElMessiri-VariableFont_wght.ttf);
 }
 
 $font1: OpenDyslexic, sans-serif;
 
-$color3: #580a30;
-$color2: #cb163f;
-$color1: #ee8502;
-$color4: #f9cc00;
-$color5: #9db386;
-$gray: #d3d2e0;
-$black: #0e1c13;
+$color1: #f43309;
+$color2: #ea4700;
+$color3: #f6db0c;
+$color4: rgb(13, 4, 67);
+$color5: rgb(53, 12, 100);
+$color6: #5499b5;
+$gray: #c7c6d1;
+$black: #000;
 $white: #f5f5f5;
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: $font1;
+  font-family: Julius, sans-serif;
   color: $black;
 }
 

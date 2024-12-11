@@ -5,10 +5,14 @@ import { SITE_TITLE, SITE_DESCRIPTION} from '../constants';
 const { title = 'Bienvenue' } = Astro.props;
 
 ---
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
 		<meta name="viewport" content="width=device-width" />
         <meta name="description" content={SITE_DESCRIPTION}>
 		<meta name="generator" content={Astro.generator} />

@@ -2,6 +2,7 @@
 import './../styles/index.css'
 import MainLayout from '../layouts/MainLayout.astro'
 import ArticleCard from '../components/ArticleCard.astro';
+import Header from '../components/Header.astro';
 import MostRecentArticle from '../components/MostRecentArticle.astro';
 import { HOMEPAGE_ARTICLE_LIMIT } from '../constants';
 
@@ -10,16 +11,18 @@ import type { CollectionEntry } from 'astro:content';
 
 const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort((a:CollectionEntry<'blog'>,b:CollectionEntry<'blog'>)=> b.data.pubDate.valueOf()- a.data.pubDate.valueOf())
 
+
 const mostRecentArticle: CollectionEntry<'blog'> = allBlogArticles[0]
 const otherArticles: CollectionEntry<'blog'>[] = allBlogArticles.slice(1) 
 ---
 
 <MainLayout>
+	<Header />
 	<div class="main-container">
 		<div class="header-container">
 			<div class="title-container">
-				<h1>Les Désirs de l'Âme</h1>
 				<h2>Poésies Passionnelles, Amoureuses et Spirituelles</h2>
+				<p>Passionnée de poésie, découvrez mes poèmes ainsi que ceux crées lors d'échanges en "chat"</p>
 			</div>
 			<div class="recent-article">
 				<MostRecentArticle article={mostRecentArticle}/>

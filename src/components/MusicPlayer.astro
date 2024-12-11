@@ -1,0 +1,153 @@
+---
+// import { musicPlayer } from "./musicPlayer"
+// const player = new musicPlayer()
+const {audioUrl,author, title, image} = Astro.props
+
+interface Props {
+    audioUrl: string;
+    author: string;
+    title: string;
+    image: string;
+    }
+
+---
+
+<style define:vars={{ image: `url("/images/${image}")` }}>
+  .album-art::before {
+    background-image: var(--image);
+  }
+</style>
+
+<audio
+  src={"/audio/" + audioUrl}
+  crossorigin="anonymous"
+  type?="audio/mp3"
+  loop="loop"
+  id="audio"
+></audio>
+<div class="player">
+      <div id="info" class="info">
+        <div class="info-artist">
+          <span class="name">{title}</span>
+          <!-- <span class="artist">{author}</span> -->
+        </div>
+        <div class="progress-bar">
+          <input
+            type="range"
+            id="track"
+            value="0"
+            min="0"
+            max="100"
+            step="0.1"
+          />
+          <span id="elapsed">0:00</span> / <span id="track-time">1:00</span>
+          <!-- <div class="bar"></div> -->
+        </div>
+      </div>
+      <div id="control-panel" class="control-panel">
+        <div class="album-art"></div>
+        <div class="controls">
+          <div class="prev">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </div>
+          <div id="play" class="play">
+            <i class="fa-solid fa-play"></i>
+            <i class="fa-solid fa-pause"></i>
+          </div>
+          <div class="next">
+            <i class="fa-solid fa-arrow-rotate-right"></i>
+          </div>
+        </div>
+      </div>
+      <div id="command" class="command">
+        <i class="fa-solid fa-volume-low"></i>
+        <input type="range" id="volume" value="1" min="0" max="1" step="0.1" />
+      </div>
+    </div>
+
+ <script>
+    const audio = document.querySelector("audio");
+    const playBtn = document.getElementById("play");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const volume = document.getElementById("volume");
+    const track = document.getElementById("track");
+    const elapsed = document.getElementById("elapsed");
+    const trackTime = document.getElementById("track-time");
+    const controlPanel = document.getElementById("control-panel");
+    const infoBar = document.getElementById("info");
+    const commandBar = document.getElementById("command");
+
+    playBtn?.addEventListener("click", ()=> play());
+    audio?.addEventListener("timeupdate", ()=> updateTrackProgress());
+    audio?.addEventListener("loadedmetadata", ()=> setupTrackSlider());
+
+    // Événement de déplacement de la piste
+    track?.addEventListener("input", (e)=> seekTrack(e));
+
+    prevBtn?.addEventListener("click", ()=> previous());
+    nextBtn?.addEventListener("click", ()=> next());
+
+    // Gestion du volume
+    volume?.addEventListener("input", (e) => {
+      volumeSetUp(e);
+    });
+
+    function volumeSetUp(e) {
+    audio && (audio.volume = parseFloat(e.target.value));
+  };
+
+  function previous() {
+    audio.currentTime = Math.max(0, audio.currentTime - 15);
+  }
+
+  function next() {
+    audio.currentTime = Math.min(
+      audio.duration,
+      audio.currentTime + 15
+    );
+  }
+
+  function updateTrackProgress() {
+    track.value = audio.currentTime;
+    elapsed.textContent = buildDuration(audio.currentTime);
+  }
+
+  function setupTrackSlider() {
+    track.max = audio.duration;
+    track.value = audio.currentTime;
+    trackTime.textContent = buildDuration(audio.duration);
+  }
+
+  function seekTrack(e) {
+    const seekTime = parseFloat(e.target.value);
+    audio.currentTime = seekTime;
+    elapsed.textContent = buildDuration(seekTime);
+  }
+
+  function buildDuration(duration) {
+    let minutes = Math.floor(duration / 60);
+    let reste = duration % 60;
+    let secondes = Math.floor(reste);
+    secondes = String(secondes).padStart(2, "0");
+
+    return minutes + ":" + secondes;
+  }
+
+  function play() {
+    let duration = audio.duration;
+    trackTime.textContent = buildDuration(duration);
+
+    [controlPanel, infoBar, commandBar].forEach((element) => {
+      element.classList.toggle("active");
+    });
+
+    if (infoBar.classList.contains("active")) {
+      audio.play();
+      audio.volume = volume.value;
+    } else {
+      audio.pause();
+    }
+  }
+
+ </script>

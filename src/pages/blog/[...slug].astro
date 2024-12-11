@@ -3,6 +3,7 @@ import "./../../styles/index.css"
 import MainLayout from "../../layouts/MainLayout.astro" 
 import {DateFormater} from "./../../utils"
 import Tags from "../../components/Tags.astro";
+import MusicPlayer from "../../components/MusicPlayer.astro";
 
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -31,9 +32,62 @@ if (entry === undefined) {
 
 const {Content} = await entry.render()
 
+console.log('AUDIO',entry.data.audio);
+
 ---
+<style>
+    .article-header {
+        background-image: url(/images/space-1280.png);
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: cover;
+    }
+</style>
 
 <MainLayout>
+    <div class="article-container">
+        <div class="article-header">
+            <div class="left-div">
+                <a href="/blog" class="back-article"> Retour aux poèmes </a>
+                <div class="image">
+                    <img src={'/images/' + entry.data.image} alt="image de l'article">
+                </div>
+            </div>
+            <div class="data">
+                <div class="tag">
+                    <Tags tags={entry.data.tags} />
+                </div>
+                <h1>{entry.data.title}</h1>
+                <h3>Une création de {entry.data.author}</h3>
+                <!-- <p class="date">{DateFormater(entry.data.pubDate)}</p> -->
+                <p class="teaser">{entry.data.teaser}</p>
+                <div class="player-container">
+                    <MusicPlayer audioUrl={entry.data.audio} author={entry.data.author} title={entry.data.title} image={entry.data.image}/>
+                </div>
+            </div>
+
+        </div>
+        <div class="content">
+            <ul class="realisation">
+                <li>
+                    <p class="title">Une création</p>
+                    <p class="name">de {entry.data.author}</p>
+                </li>
+                <li>
+                    <p class="title">Mis en ligne</p>
+                    <p class="name">{DateFormater(entry.data.pubDate)}</p>
+                </li>
+                <li> <p class="title">Enregistrement</p>
+                    <p class="name">Juin 2024</p></li>
+            </ul>
+            <div class="poeme">
+                <Content />
+            </div>
+        </div>
+    </div>
+</MainLayout>
+
+<!-- <MainLayout>
     <div class="article-container">
         
             <a href="/blog" class="back-article"> Retour aux poèmes </a>
@@ -44,8 +98,9 @@ const {Content} = await entry.render()
             <img src={'/images/' + entry.data.image} alt="image de l'article">
             <Content />
     </div>
-</MainLayout>
+</MainLayout> -->
 
 <style is:global>
+    
 /*Pour styliser le composant Content mais avec la classe article-content je touche le contenu de content*/
 </style>
