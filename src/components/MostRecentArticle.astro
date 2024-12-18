@@ -12,7 +12,7 @@ const {article} = Astro.props
 <div class="most-recent-article-container">
     <a href={'/blog/' + article.slug}>
         <!-- <img src="images/blog-4.jpg" alt=""> -->
-        <div class="content" style=`background: url("/images/${article.data.image}") center/cover`>
+        <div class="content" style=`background: url(${article.data.image.src}) center/cover`>
             <h2>Mon tout dernier poême</h2>
             <h3>{article.data.title}</h3>
             <p>{DateFormater(article.data.pubDate)}</p>

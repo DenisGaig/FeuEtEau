@@ -11,6 +11,12 @@
     justify-content: center;
     align-items: center;
 
+    @media screen and (max-width: 770px) {
+      & {
+        flex-direction: column;
+      }
+    }
+
     &::after {
       content: " ";
       display: block;
@@ -34,7 +40,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      position: relative;
+      // position: relative;
       // gap: 30px;
 
       .back-article {
@@ -56,15 +62,10 @@
       }
 
       .image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
-        // position: absolute;
-
-        img {
-          width: 60%;
-        }
+        // z-index: 10;
+        position: absolute;
+        top: 70px;
+        left: 0;
       }
     }
 
@@ -72,6 +73,12 @@
       width: 50%;
       margin: 20px 0 0 80px;
       z-index: 10;
+
+      @media screen and (max-width: 770px) {
+        & {
+          width: 100%;
+        }
+      }
 
       .tag {
         margin-top: 40px;
@@ -82,6 +89,12 @@
         font-weight: 600;
         margin: 10px 0 10px;
         color: $white;
+
+        @media screen and (max-width: 770px) {
+          & {
+            font-size: 2rem;
+          }
+        }
       }
 
       h3 {
@@ -98,7 +111,12 @@
           left: 0;
           height: 2px;
           width: 100%;
-          background-color: red;
+          background: linear-gradient(
+            90deg,
+            #ffffff,
+            rgba(235, 235, 235, 0.4) 60%,
+            transparent
+          );
         }
       }
 
@@ -120,16 +138,41 @@
     }
   }
 
+  .transition {
+    height: 20vh;
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      #1b1b1b,
+      rgba(0, 0, 0, 0.3) 70%,
+      transparent
+    );
+  }
+
   .content {
     width: 80%;
-    margin: 0 auto;
+    z-index: 10;
+    margin: -40px auto 0px;
     background-color: $white;
     padding: 30px;
     display: flex;
 
+    @media screen and (max-width: 770px) {
+      & {
+        flex-direction: column-reverse;
+      }
+    }
+
     .realisation {
       width: 30%;
       margin-left: 20px;
+
+      @media screen and (max-width: 770px) {
+        & {
+          width: 80%;
+          margin-left: 0;
+        }
+      }
       li {
         margin: 20px auto;
         .title {
@@ -143,27 +186,33 @@
     .poeme {
       width: 70%;
 
+      @media screen and (max-width: 770px) {
+        & {
+          width: 100%;
+        }
+      }
+
       p {
-        margin: 10px 0;
+        font-size: 18px;
+        margin: 15px 0;
+
+        @media screen and (max-width: 770px) {
+          & {
+            font-size: 16px;
+          }
+        }
       }
     }
   }
 
-  // img {
-  //   width: 100%;
-  // }
+  .comments-container {
+    min-height: 60vh;
+    background-color: $color5;
+    margin-top: -40px;
 
-  // p {
-  //   margin: 10px 0 20px 0;
-  //   font-size: 0.9rem;
-  //   line-height: 1.8rem;
-  //   font-weight: 500;
-  // }
-  // h2 {
-  //   margin: 10px 0 20px;
-  //   color: $color1;
-  // }
-  // h3 {
-  //   font-size: 0.8rem;
-  // }
+    h2 {
+      text-align: center;
+      margin-top: 60px;
+    }
+  }
 }

@@ -12,7 +12,7 @@ interface Props {
 
 ---
 
-<style define:vars={{ image: `url("/images/${image}")` }}>
+<style define:vars={{ image: `url(${image})` }}>
   .album-art::before {
     background-image: var(--image);
   }

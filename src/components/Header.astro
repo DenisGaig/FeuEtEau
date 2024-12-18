@@ -29,35 +29,34 @@
      
 </header>
 
-<!-- <script>
-import type { number } from "astro:schema"
+<script>
+    const container = document.querySelector("header");
+    const particlesOnScreen = 100;
 
-    const t1 = document.querySelector('.t1')
-    const t2 = document.querySelector('.t2')
-    const title1 = "De Feu"
-    const title2 = "& d'Eau"
+    function snowFall () {
+  for (let i = 0; i < particlesOnScreen; i++) {
+    let leftSnow = Math.floor(Math.random() * container.clientWidth);
+    let topSnow = Math.floor(Math.random() * container.clientHeight);
+    //   let topSnow = 0;
 
-    const sleep = (ms:number) => {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
+    let widthSnow = Math.floor(Math.random() * 30);
+    let timeSnow = Math.floor(Math.random() * 7 + 5);
+    let blurSnow = Math.floor(Math.random() * 20);
+    let opacitySnow = Math.random();
+    let div = document.createElement("div");
 
-    function typeWriter (element:HTMLElement, text:string, i=0) {
-        if (i === 0) {
-            element.textContent = '';
-        }
-        element.textContent += text[i];
+    div.classList.add("sparkle");
+    div.style.left = leftSnow + "px";
+    div.style.top = topSnow + "px";
+    div.style.width = widthSnow + "px";
+    div.style.height = widthSnow + "px";
+    div.style.animationDuration = timeSnow + "s";
+    div.style.filter = "blur(" + blurSnow + "px)";
+    div.style.opacity = opacitySnow.toString();
 
-        if (i === text.length - 1) {
-            return ;
-        }
-        setTimeout(()=> typeWriter(element, text, i+1),200)
-    }
-    const control = async () => {
-        await typeWriter(t1,title1)
-        await sleep(2000)
-        await typeWriter(t2,title2)
-    }
-
-    control();
-</script> -->
+    container && container.appendChild(div);
+  }
+};
+snowFall();
+</script>
     

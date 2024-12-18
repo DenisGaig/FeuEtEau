@@ -2,8 +2,8 @@
 title: "Je veux vivre l'intense"
 pubDate: 2024-12-01
 author: "Windy"
-teaser: ""
-image: "vivre-intense.webp"
+teaser: "Intensément forever"
+image: { src: "/images/vivre-intense.webp", alt: "une image intense" }
 audio: "Elle-va-se-coucher.mp3"
 tags: ["amour", "poésie"]
 slug: je-veux-vivre-l-intense

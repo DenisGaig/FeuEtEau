@@ -1,6 +1,20 @@
 .search-page {
-  padding-top: 100px;
-  margin: 0 30px;
+  // padding-top: 100px;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background: $color5;
+    text-align: center;
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $white;
+    }
+  }
 
   .back {
     background: $color1;
@@ -20,15 +34,8 @@
     margin: 20px;
   }
 
-  .title {
-    display: block;
-    margin: 20px auto;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: $color2;
-  }
-
   .search-articles-container {
+    margin: 0 30px;
     display: flex;
     flex-wrap: wrap;
     gap: 0 20px;

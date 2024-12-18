@@ -1,14 +1,17 @@
 footer {
   min-height: 150px;
-  padding: 20px 30px;
+  padding: 10px 30px;
   background-color: $black;
   display: flex;
   justify-content: left;
-  align-items: center;
+  align-items: start;
   gap: 50px;
 
   .about-footer {
-    width: 30%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+
     @media screen and (min-width: 250px) and (max-width: 550px) {
       & {
         width: 50%;
@@ -23,8 +26,47 @@ footer {
       width: 80%;
       color: $white;
     }
+    small {
+      color: $white;
+      margin-top: 30px;
+      border-top: 1px solid $white;
+      padding-top: 10px;
+      span {
+        color: $white;
+      }
+    }
   }
-  .tags-container a {
-    color: $white;
+  .tags-container {
+    width: 60%;
+    @media screen and (min-width: 250px) and (max-width: 550px) {
+      & {
+        width: 50%;
+        ul {
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+
+  .tags-container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    li {
+      // margin-left: 15px;
+      padding: 0 5px;
+      background-color: $white;
+      border-radius: 5px;
+      &:hover {
+        background: $color5;
+        a {
+          color: $white;
+          font-weight: bold;
+        }
+      }
+      a {
+        color: $black;
+      }
+    }
   }
 }

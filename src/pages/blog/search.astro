@@ -30,12 +30,14 @@ const searchResults = allBlogArticles.filter((article)=> {
 
 <MainLayout title="Search Results">
     <div class="search-page">
+        <div class="header">
+            <span class="title">Voici tous les poèmes contenant le mot "{query}"</span>
+        </div>
         
         <a href="/blog" class="back">Tous les poèmes</a>
         <div class="search-container">
 			<SearchForm />
 		</div>   
-        <span class="title">Voici tous les poèmes avec -- {query}</span>
         <div class="search-articles-container">
             {searchResults.map((article)=> (<ArticleCard article={article}/>))}
 

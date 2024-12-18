@@ -19,14 +19,24 @@
     a:visited {
       color: azure;
     }
-    a:hover {
-      color: rgb(72, 8, 133);
-    }
+    // a:hover {
+    //   color: rgb(72, 8, 133);
+    // }
   }
   .tag-odd {
     background-color: $color1;
+    transition: 0.3s ease;
+
+    &:hover {
+      background-color: $color2;
+      transform: scale(1.05);
+    }
   }
   .tag-even {
     background-color: $color5;
+    &:hover {
+      background-color: $color4;
+      transform: scale(1.05);
+    }
   }
 }

@@ -26,7 +26,8 @@
     text-align: center;
 
     h2 {
-      font-size: 0.9rem;
+      color: $white;
+      font-size: 1.2rem;
       margin: 15px 0;
 
       @media screen and (min-width: 650px) and (max-width: 928px) {
@@ -42,7 +43,8 @@
       }
     }
     h3 {
-      font-size: 1rem;
+      color: $white;
+      font-size: 2rem;
       margin: 15px 0;
 
       @media screen and (min-width: 650px) and (max-width: 928px) {
@@ -60,8 +62,9 @@
 
     p {
       font-style: italic;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: 600;
+      color: $white;
 
       @media screen and (min-width: 650px) and (max-width: 928px) {
         & {

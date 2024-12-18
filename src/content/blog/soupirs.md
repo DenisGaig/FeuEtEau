@@ -3,7 +3,7 @@ title: "Soupirs"
 pubDate: 2024-12-05
 author: "Windy"
 teaser: "Soupirs soupirs, ne cessez pas de soupirez"
-image: "soupirs.webp"
+image: { src: "/images/soupirs.webp", alt: "une image de soupirs" }
 audio: "D-ou-viennent-tes-soupirs.mp3"
 tags: ["amour", "poésie", "sensualité"]
 slug: soupirs

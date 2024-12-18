@@ -3,7 +3,7 @@ title: "L'amour océan"
 pubDate: 2024-12-07
 author: "Windy"
 teaser: "Amour amour encore de l'amour plein votre âme !"
-image: "amour-ocean.webp"
+image: { src: "/images/amour-ocean.webp", alt: "une image d'océan" }
 audio: "test.mp3"
 tags: ["amour", "poésie"]
 slug: l-amour-ocean

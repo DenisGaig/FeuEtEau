@@ -1,5 +1,7 @@
 ---
 import "./../../styles/index.css"
+import { Image } from "astro:assets";
+
 import MainLayout from "../../layouts/MainLayout.astro" 
 import {DateFormater} from "./../../utils"
 import Tags from "../../components/Tags.astro";
@@ -32,8 +34,6 @@ if (entry === undefined) {
 
 const {Content} = await entry.render()
 
-console.log('AUDIO',entry.data.audio);
-
 ---
 <style>
     .article-header {
@@ -50,7 +50,7 @@ console.log('AUDIO',entry.data.audio);
             <div class="left-div">
                 <a href="/blog" class="back-article"> Retour aux poèmes </a>
                 <div class="image">
-                    <img src={'/images/' + entry.data.image} alt="image de l'article">
+                    <Image src={entry.data.image.src} alt={entry.data.image.alt} width="450" height="450"/>
                 </div>
             </div>
             <div class="data">
@@ -62,11 +62,12 @@ console.log('AUDIO',entry.data.audio);
                 <!-- <p class="date">{DateFormater(entry.data.pubDate)}</p> -->
                 <p class="teaser">{entry.data.teaser}</p>
                 <div class="player-container">
-                    <MusicPlayer audioUrl={entry.data.audio} author={entry.data.author} title={entry.data.title} image={entry.data.image}/>
+                    <MusicPlayer audioUrl={entry.data.audio} author={entry.data.author} title={entry.data.title} image={entry.data.image.src}/>
                 </div>
             </div>
 
         </div>
+        <div class="transition"></div>
         <div class="content">
             <ul class="realisation">
                 <li>
@@ -83,6 +84,9 @@ console.log('AUDIO',entry.data.audio);
             <div class="poeme">
                 <Content />
             </div>
+        </div>
+        <div class="comments-container">
+            <h2>Commentaires</h2>
         </div>
     </div>
 </MainLayout>
