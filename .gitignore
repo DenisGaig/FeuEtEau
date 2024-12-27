@@ -24,4 +24,5 @@ pnpm-debug.log*
 .idea/
 
 # audio public files
-public/audio
+public/audio/
+src/private/

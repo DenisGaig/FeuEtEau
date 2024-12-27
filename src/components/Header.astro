@@ -31,32 +31,33 @@
 
 <script>
     const container = document.querySelector("header");
-    const particlesOnScreen = 100;
+    const particlesOnScreen = 50;
 
     function snowFall () {
-  for (let i = 0; i < particlesOnScreen; i++) {
-    let leftSnow = Math.floor(Math.random() * container.clientWidth);
-    let topSnow = Math.floor(Math.random() * container.clientHeight);
-    //   let topSnow = 0;
+      for (let i = 0; i < particlesOnScreen; i++) {
+      let leftSnow = Math.floor(Math.random() * container!.clientWidth);
+      let topSnow = Math.floor(Math.random() * container!.clientHeight);
+      //   let topSnow = 0;
 
-    let widthSnow = Math.floor(Math.random() * 30);
-    let timeSnow = Math.floor(Math.random() * 7 + 5);
-    let blurSnow = Math.floor(Math.random() * 20);
-    let opacitySnow = Math.random();
-    let div = document.createElement("div");
+      let widthSnow = Math.floor(Math.random() * 10);
+      let timeSnow = Math.floor(Math.random() * 7 + 5);
+      let blurSnow = Math.floor(Math.random() * 20);
+      let opacitySnow = Math.random();
+      let div = document.createElement("div");
 
-    div.classList.add("sparkle");
-    div.style.left = leftSnow + "px";
-    div.style.top = topSnow + "px";
-    div.style.width = widthSnow + "px";
-    div.style.height = widthSnow + "px";
-    div.style.animationDuration = timeSnow + "s";
-    div.style.filter = "blur(" + blurSnow + "px)";
-    div.style.opacity = opacitySnow.toString();
+      div.classList.add("sparkle");
+      div.style.left = leftSnow + "px";
+      div.style.top = topSnow + "px";
+      div.style.width = widthSnow + "px";
+      div.style.height = widthSnow + "px";
+      div.style.animationDuration = timeSnow + "s";
+      // div.style.filter = "blur(" + blurSnow + "px)";
+      div.style.opacity = opacitySnow.toString();
 
-    container && container.appendChild(div);
-  }
-};
-snowFall();
+      container && container.appendChild(div);
+    } 
+    };
+    snowFall(); 
+
 </script>
     

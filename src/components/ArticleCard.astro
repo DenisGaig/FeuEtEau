@@ -13,15 +13,14 @@ const {article} = Astro.props;
 
 <div class="article-card">
     <a class="article-slug" href={'/blog/' + article.slug}>
-    </a>
-    <Image src={article.data.image.src} alt={article.data.image.alt} width="200" height="200"/>
-    <div class="card-content">
-        <h2>{article.data.title}</h2>
-        <p class="date">{DateFormater(article.data.pubDate)}</p>
-        <div class="teaser">
-            <p>{article.data.teaser}</p>
-        </div>
+        <Image src={article.data.image.src} alt={article.data.image.alt} width="200" height="200"/>
+        <div class="card-content">
+            <h2>{article.data.title}</h2>
+            <p class="date">{DateFormater(article.data.pubDate)}</p>
+            <div class="teaser">
+                <p>{article.data.teaser}</p>
+            </div>
         <!-- <Tags tags={article.data.tags} /> -->
-                
-    </div>
+        </div>
+    </a>
 </div>

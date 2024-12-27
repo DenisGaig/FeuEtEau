@@ -15,8 +15,9 @@ header {
   .sparkle {
     height: 15px;
     width: 15px;
+    border-radius: 100%;
     background: #edc951;
-    mask: radial-gradient(#0000 71%, #000 72%) 10000% 10000%/99.5% 99.5%;
+    // mask: radial-gradient(#0000 71%, #000 72%) 10000% 10000%/99.5% 99.5%;
     position: absolute;
     content: "";
     top: 0;

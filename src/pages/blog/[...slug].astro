@@ -1,14 +1,13 @@
 ---
-import "./../../styles/index.css"
 import { Image } from "astro:assets";
+import "./../../styles/index.css";
 
-import MainLayout from "../../layouts/MainLayout.astro" 
-import {DateFormater} from "./../../utils"
-import Tags from "../../components/Tags.astro";
 import MusicPlayer from "../../components/MusicPlayer.astro";
+import Tags from "../../components/Tags.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { DateFormater } from "./../../utils";
 
 import { getEntry } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 
 const {slug} = Astro.params;
 if (slug === undefined) {
@@ -62,7 +61,7 @@ const {Content} = await entry.render()
                 <!-- <p class="date">{DateFormater(entry.data.pubDate)}</p> -->
                 <p class="teaser">{entry.data.teaser}</p>
                 <div class="player-container">
-                    <MusicPlayer audioUrl={entry.data.audio} author={entry.data.author} title={entry.data.title} image={entry.data.image.src}/>
+                    <MusicPlayer audioName={entry.data.audio} author={entry.data.author} title={entry.data.title} image={entry.data.image.src}/>
                 </div>
             </div>
 

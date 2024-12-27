@@ -664,6 +664,8 @@ footer .tags-container ul li a {
 }
 
 .article-card {
+  aspect-ratio: 1/1;
+  max-width: 450px;
   -webkit-box-flex: 1;
       -ms-flex: 1 0 30%;
           flex: 1 0 30%;
@@ -687,62 +689,59 @@ footer .tags-container ul li a {
   background-image: linear-gradient(-180deg, transparent 6%, #000000 100%);
 }
 .article-card .article-slug {
+  display: block;
   cursor: pointer;
   z-index: 3;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
 }
-.article-card img {
+.article-card .article-slug img {
   height: auto;
   width: 100%;
   border-radius: 10px;
 }
-.article-card .card-content {
+.article-card .article-slug .card-content {
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   position: absolute;
   top: 40%;
-  left: 10%;
+  left: 5%;
   right: 0;
   bottom: 0;
-  width: 80%;
-  height: 100%;
+  width: 90%;
+  height: 60%;
   z-index: 10;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  padding: 20px;
 }
 @media screen and (min-width: 550px) and (max-width: 1100px) {
-  .article-card .card-content {
+  .article-card .article-slug .card-content {
     top: 20%;
   }
-  .article-card .card-content .teaser p {
+  .article-card .article-slug .card-content .teaser p {
     font-size: 1rem !important;
   }
 }
-.article-card .card-content h2 {
+.article-card .article-slug .card-content h2 {
   font-size: 1.7rem;
   line-height: 2rem;
   font-weight: bold;
   color: #fff;
 }
-.article-card .card-content .date {
-  font-size: 0.8rem;
+.article-card .article-slug .card-content .date {
+  font-size: 1rem;
   color: #fff;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
-.article-card .card-content .teaser {
-  position: relative;
-  margin-bottom: 40px;
-}
-.article-card .card-content .teaser p {
+.article-card .article-slug .card-content .teaser p {
   color: #fff;
   margin: 0 10px 20px 0;
   font-size: 1.3rem;
 }
 @media screen and (max-width: 549px) {
-  .article-card .card-content .teaser p {
+  .article-card .article-slug .card-content .teaser p {
     font-size: 1rem;
   }
 }
@@ -980,9 +979,8 @@ header {
 header .sparkle {
   height: 15px;
   width: 15px;
+  border-radius: 100%;
   background: #edc951;
-  -webkit-mask: radial-gradient(rgba(0, 0, 0, 0) 71%, #000 72%) 10000% 10000%/99.5% 99.5%;
-          mask: radial-gradient(rgba(0, 0, 0, 0) 71%, #000 72%) 10000% 10000%/99.5% 99.5%;
   position: absolute;
   content: "";
   top: 0;
@@ -1090,11 +1088,11 @@ header .right {
 }
 .player .info {
   position: absolute;
-  height: 60px;
+  height: 70px;
   top: 0;
   opacity: 0;
-  left: 10px;
-  right: 10px;
+  left: 5px;
+  right: 5px;
   background-color: #4f3f9e;
   padding: 5px 15px 5px 15px;
   border-radius: 15px;
@@ -1108,6 +1106,7 @@ header .right {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  /* Determinate: */
 }
 .player .info.active {
   top: -60px;
@@ -1119,23 +1118,15 @@ header .right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
   gap: 3px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
-.player .info .artist {
-  color: #222;
-  font-size: 12px;
-}
-.player .info .name {
+.player .info .info-artist .name {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 .player .info #elapsed,
@@ -1146,66 +1137,38 @@ header .right {
 .player .info #elapsed {
   margin-left: 30px;
 }
-.player .info .progress-bar {
-  margin-top: 6px;
+.player .info #progress-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: #fff;
-  /***** Track Styles *****/
-  /***** Chrome, Safari, Opera, and Edge Chromium *****/
-  /******** Firefox ********/
-  /***** Thumb Styles *****/
-  /***** Chrome, Safari, Opera, and Edge Chromium *****/
-  /***** Focus Styles *****/
-  /* Removes default focus */
-  /***** Chrome, Safari, Opera, and Edge Chromium *****/
-  /******** Firefox ********/
-}
-.player .info .progress-bar input[type=range] {
+  width: 90%;
   position: absolute;
-  top: 0px;
-  left: 10px;
-  right: 10px;
+  top: -2px;
+  left: 5%;
+  right: 0;
 }
-.player .info .progress-bar input[type=range] {
+.player .info progress[value] {
+  --color: yellow; /* the progress color */
+  --background: lightgrey; /* the background color */
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-.player .info .progress-bar input[type=range]::-webkit-slider-runnable-track {
-  background: #176ba3;
-  height: 4px;
-  border-radius: 5px;
-}
-.player .info .progress-bar input[type=range]::-moz-range-track {
-  background: #176ba3;
-  height: 4px;
-  border-radius: 5px;
-}
-.player .info .progress-bar input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
   appearance: none;
-  border-radius: 50%;
-  margin-top: -3px; /* Centers thumb on the track */
-  background-color: #f08a05;
-  height: 10px;
-  width: 10px;
+  border: none;
+  height: 7px;
+  border-radius: 10em;
+  background: var(--background);
 }
-.player .info .progress-bar input[type=range]:focus {
-  outline: none;
+.player .info progress[value]::-webkit-progress-bar {
+  border-radius: 10em;
+  background: var(--background);
 }
-.player .info .progress-bar input[type=range]:focus::-webkit-slider-thumb {
-  border: 1px solid #053a5f;
-  outline: 3px solid #053a5f;
-  outline-offset: 0.125rem;
+.player .info progress[value]::-webkit-progress-value {
+  border-radius: 10em;
+  background: var(--color);
 }
-.player .info .progress-bar input[type=range]:focus::-moz-range-thumb {
-  border: 1px solid #053a5f;
-  outline: 3px solid #053a5f;
-  outline-offset: 0.125rem;
+.player .info progress[value]::-moz-progress-bar {
+  border-radius: 10em;
+  background: var(--color);
 }
 .player .control-panel {
   position: relative;

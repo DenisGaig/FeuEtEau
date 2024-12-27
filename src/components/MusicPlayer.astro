@@ -1,13 +1,12 @@
 ---
-// import { musicPlayer } from "./musicPlayer"
-// const player = new musicPlayer()
-const {audioUrl,author, title, image} = Astro.props
+const { audioName, author, title, image} = Astro.props
 
 interface Props {
-    audioUrl: string;
+    audioName: string;
     author: string;
     title: string;
     image: string;
+    
     }
 
 ---
@@ -19,30 +18,20 @@ interface Props {
 </style>
 
 <audio
-  src={"/audio/" + audioUrl}
   crossorigin="anonymous"
-  type?="audio/mp3"
+  type?="audio/mpeg"
   loop="loop"
+  preload="metadata"
   id="audio"
 ></audio>
-<div class="player">
+
+<div class="player" data-audio-name={audioName}>
       <div id="info" class="info">
         <div class="info-artist">
           <span class="name">{title}</span>
-          <!-- <span class="artist">{author}</span> -->
         </div>
-        <div class="progress-bar">
-          <input
-            type="range"
-            id="track"
-            value="0"
-            min="0"
-            max="100"
-            step="0.1"
-          />
-          <span id="elapsed">0:00</span> / <span id="track-time">1:00</span>
-          <!-- <div class="bar"></div> -->
-        </div>
+        <progress id="progress-bar" value="0" max="100"></progress>
+        <span id="elapsed">0:00</span> / <span id="track-time">1:00</span>
       </div>
       <div id="control-panel" class="control-panel">
         <div class="album-art"></div>
@@ -66,88 +55,115 @@ interface Props {
     </div>
 
  <script>
-    const audio = document.querySelector("audio");
+
+    const audio = document.getElementById("audio") as HTMLAudioElement | null;
+    const musicPlayer = document.querySelector('.player')as HTMLElement | null;
+    const audioName = musicPlayer!.dataset.audioName;
+    console.log(audioName);
+    
     const playBtn = document.getElementById("play");
     const prevBtn = document.querySelector(".prev");
     const nextBtn = document.querySelector(".next");
-    const volume = document.getElementById("volume");
-    const track = document.getElementById("track");
+    const progressBar = document.getElementById("progress-bar") as HTMLProgressElement | null;
+    const volume = document.getElementById("volume") as HTMLInputElement | null;
     const elapsed = document.getElementById("elapsed");
     const trackTime = document.getElementById("track-time");
+    let duration : number = 0;
+    let isPlaying = false;
+
     const controlPanel = document.getElementById("control-panel");
     const infoBar = document.getElementById("info");
     const commandBar = document.getElementById("command");
 
-    playBtn?.addEventListener("click", ()=> play());
-    audio?.addEventListener("timeupdate", ()=> updateTrackProgress());
-    audio?.addEventListener("loadedmetadata", ()=> setupTrackSlider());
-
-    // Événement de déplacement de la piste
-    track?.addEventListener("input", (e)=> seekTrack(e));
-
-    prevBtn?.addEventListener("click", ()=> previous());
-    nextBtn?.addEventListener("click", ()=> next());
+    // Fetch préalable pour récupérer les headers
+    fetch("/api/audio/" + audioName)
+    .then(async response => {
+      duration = parseFloat(response.headers.get("X-Audio-Duration") ?? "0");
+      console.log("Duration:", duration);
+      
+      // Attendre le blob
+      const blob = await response.blob();
+      if (audio) {
+        audio.src = URL.createObjectURL(blob);
+        setupTrackSlider();
+      }
+    })
+    .catch(error => console.error("Error fetching audio duration:", error));
+    
+  playBtn?.addEventListener("click", ()=> play());
+  prevBtn?.addEventListener("click", ()=> previous());
+  nextBtn?.addEventListener("click", ()=> next());
 
     // Gestion du volume
-    volume?.addEventListener("input", (e) => {
-      volumeSetUp(e);
-    });
+  volume?.addEventListener("input", (e) => {
+    volumeSetUp(e);
+  });
 
-    function volumeSetUp(e) {
-    audio && (audio.volume = parseFloat(e.target.value));
+
+  function volumeSetUp(e: Event) {
+    const target = e.target as HTMLInputElement;
+    audio && (audio.volume = parseFloat(target.value));
   };
 
   function previous() {
-    audio.currentTime = Math.max(0, audio.currentTime - 15);
+    audio!.currentTime = Math.max(0, audio!.currentTime - 15);
   }
 
   function next() {
-    audio.currentTime = Math.min(
-      audio.duration,
-      audio.currentTime + 15
+    audio!.currentTime = Math.min(
+      duration,
+      audio!.currentTime + 15
     );
   }
 
-  function updateTrackProgress() {
-    track.value = audio.currentTime;
-    elapsed.textContent = buildDuration(audio.currentTime);
-  }
-
   function setupTrackSlider() {
-    track.max = audio.duration;
-    track.value = audio.currentTime;
-    trackTime.textContent = buildDuration(audio.duration);
+    console.log("DUR",duration);
+    // progressBar!.max = duration;
+    // progressBar!.value = 0;
+    trackTime!.textContent = buildDuration(duration);
   }
 
-  function seekTrack(e) {
-    const seekTime = parseFloat(e.target.value);
-    audio.currentTime = seekTime;
-    elapsed.textContent = buildDuration(seekTime);
-  }
-
-  function buildDuration(duration) {
-    let minutes = Math.floor(duration / 60);
-    let reste = duration % 60;
+  function buildDuration(duration_data : number) {
+    let minutes = Math.floor(duration_data / 60);
+    let minutesPadded = (String(minutes).padStart(2, "0"));
+    let reste = duration_data % 60;
     let secondes = Math.floor(reste);
-    secondes = String(secondes).padStart(2, "0");
+    let secondesPadded = (String(secondes).padStart(2, "0"));
 
-    return minutes + ":" + secondes;
-  }
+     return minutesPadded + ":" + secondesPadded;
+   }
 
-  function play() {
-    let duration = audio.duration;
-    trackTime.textContent = buildDuration(duration);
-
-    [controlPanel, infoBar, commandBar].forEach((element) => {
-      element.classList.toggle("active");
-    });
-
-    if (infoBar.classList.contains("active")) {
-      audio.play();
-      audio.volume = volume.value;
-    } else {
-      audio.pause();
+  function updateProgressBar () {
+    if (isPlaying) {
+      const currentTime = audio!.currentTime; // - startTime;
+      const progress = (currentTime / duration) * 100;
+      
+      elapsed!.textContent = buildDuration(audio!.currentTime);
+      progressBar!.value = progress;
+      
+      if(currentTime < duration) {
+          requestAnimationFrame(updateProgressBar);
+      }
     }
-  }
+  };
+
+   function play() {
+    
+     [controlPanel, infoBar, commandBar].forEach((element) => {
+       element!.classList.toggle("active");
+     });
+
+     if (infoBar!.classList.contains("active")) {
+       audio!.play();
+       audio!.volume = parseInt(volume!.value);
+       isPlaying = true;
+       
+      updateProgressBar();
+
+     } else {
+       audio!.pause();
+       isPlaying= false;
+     }
+   }
 
  </script>

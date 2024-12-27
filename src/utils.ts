@@ -1,5 +1,5 @@
 function DateFormater(date: Date): string {
-  let newDate = new Date(date).toLocaleDateString("fr-FR", {
+  const newDate = new Date(date).toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -15,5 +15,4 @@ function capitalize(str: string): string {
   }
 }
 
-export { DateFormater };
-export { capitalize };
+export { capitalize, DateFormater };
